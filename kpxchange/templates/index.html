@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Only1mega : Home</title>
+        <link rel="icon" type="image/icon" href="static/images/tabicon.ico">
+
+        <link rel="stylesheet" type="text/css" href="">
+        <link href="static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="static/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,700,700i|Josefin+Sans:700" rel="stylesheet">
+        <link href="static/css/main.css" rel="stylesheet">
+        <link rel="icon" href="static/images/logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/script.js"></script>
+
+       <script type=text/javascript>
+	  $(document).ready(function() {
+	    $("div#getlink").click(function() {
+	  $.post("/submit", function(data) {
+	        $("#showlink").fadeIn().text("Save this ID : "+ data);
+	      })
+	        .fail(function(){$("#showlink").fadeIn().text("Sorry only 1 ID per minute");
+	      })
+	    });
+	  });
+
+       </script>
+       <script>
+	 $(document).ready(function() {
+	 $('form').on('submit', function(event) {
+		$.ajax({
+			data: $("#recap").serialize(),
+			type : 'POST',
+			url : '/generate'
+		})
+		.done(function(data) {
+			if (data.error) {
+				$('#showlink').text(data).show();
+			}
+			else {
+				$('#showlink').text(data).show();
+			}
+		});
+		event.preventDefault();
+	   });
+	 });
+	 </script>
+    </head>
+
+    <body>
+        <div id="index">                                           <!-- Index starts here -->
+            <div class="container main">
+                <div class="row home">
+                    <div id = "index_left" class="col-md-6 left">
+                        <img class="img-responsive img-rabbit" src="static/images/floppy2.png">
+                    </div>
+                    <div id = "index_right" class="col-md-6 text-center right">
+                        <div class="logo">
+                          <img src="static/images/logo.png" width="64" height="64">
+                            <h4>1.44 Online</h4>
+                        </div>
+                        <p class="home-description">
+                            No register required, anonimous, and (i hope) safe service to store only a floppy (1.44MB) of data online to sync small files between your devices.
+                         </p>
+                        <div class="btn-group-vertical custom_btn animated slideinright">
+			  <div hidden id="showlink" class="alert alert-success" role="alert"></div>
+			  <!--<form method="post" action="/submit" id="form1">{{ recaptcha }}</form>
+			    <button type="submit" form="form1" value="Submit">Submit</button>
+			    <div id="getlink" class="btn btn-rabbit">Get the ID!</div>
+			  <button type="button" class="btn btn-rabbit" data-toggle="modal" data-target="#myModal">Get the ID! </button> -->
+			  <div><form id="recap">{{ recaptcha }}
+			    <button type="submit" class="btn btn-rabbit" value="Submit" >Get the ID</button>
+			  </form></div>
+                            <div id="about" class="btn btn-rabbit">How to use it</div>
+                            <div id="work" class="btn btn-rabbit">Security</div>
+                            <div id="contact" class="btn btn-rabbit">About this service</div>
+                        </div>
+                         <div class="social">
+                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-github" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>                                                      <!-- index ends here -->
+
+        <div id="about_scroll" class="pages ">                      <!-- about strats here  -->
+            <div class="container main">
+                <div class="row">
+                    <div class="col-md-6 left" id="about_left">
+                        <img class="img-responsive img-rabbit" src="static/images/howto.png">
+                    </div>
+
+                    <div class="col-md-6 right" id="about_right">
+                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to home </a>
+                        <div id="watermark">
+                            <h2 class="page-title" text-center>How to use it</h2>
+                            <div class="marker">H</div>
+                        </div>
+                        <p class='subtitle'>You can use it directly with the command line, by scripting  or integrated with your own applications.. use your imagination.
+                        </p>
+                        <p class="info">"Bash exaples: "</p>
+			<p><code>Upload: curl -F "file@[myfile]" https://website.com/upload/[ID] </code><p/>
+			<code>Download: curl https://website.com/download/[ID]/[myfile] </code>
+                    </div>
+                </div>
+            </div>
+        </div>                                                                <!-- About ends here -->
+
+
+
+        <div id="work_scroll" class="pages">                                  <!-- Work starts here -->
+            <div class="container main">
+                <div class="row">
+                    <div class="col-md-6" id="work_left">
+                        <div id="owl-demo" class="owl-carousel owl-theme">
+                            <img class="img-responsive img-rabbit" src="static/images/security.png">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="work_right">
+                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to Home </a>
+                        <div id="watermark">
+                            <h2 class="page-title" text-center>Security</h2>
+                            <div class="marker">s</div>
+                        </div>
+                        <p class='subtitle'>Some useful information about usage security.
+                        </p>
+                        <p class="info"> We don't track you, log you or collect any private data. Https connections don't show your complete URL path, only the domain, so your ID is safe against most common sniffing tecniques. Be careful if you use it from a browser, trackers and history can expose your ID, that's the reason why this service do not offer a web interface to manage your files (and because im lazy). So if you use it carefully and knowing the limitations it's faily safe.
+			</p>
+                    </div>
+                </div>
+            </div>
+        </div>                                                                 <!-- Work ends here  -->
+
+
+        <div id="contact_scroll" class="pages">                             <!-- Contact starts here -->
+            <div class="container main">
+                <div class="row">
+                    <div class="col-md-6 left" id="contact_left">
+                        <img class="img-responsive img-rabbit" src="static/images/about.png">
+                    </div>
+
+                    <div class="col-md-6 right" id="contact_right">
+                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to Home </a>
+                        <div id="watermark">
+                            <h2 class="page-title" text-center>About this service and conditions</h2>
+                            <div class="marker">c</div>
+                        </div>
+                        <p class='subtitle'>I offer this service for free and fun, there is no guarrantee or responsabilite involved. Access frecuency is a little limited for security reasons so please try to make a fair use of this.
+                        </p>
+                        <!-- form
+                        <form class="form_edit">
+                            <div class="form-group">
+                                <input type="name" class="form-control" id="exampleInputName" placeholder="Name">
+                            </div>
+
+                            <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            </div>
+
+                            <div class="form-group">
+                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-rabbit submit">Send Message</button>
+                        </form> -->
+                    </div>
+                </div>
+            </div>
+
+            <footer class="text-center">
+                <div class="container bottom">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>Made with <i class="fa fa-heartbeat" aria-hidden="true"></i> by <a href="https://themewagon.com/">Themewagon</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>                                                              <!-- Contact ends here -->
+
+    </body>
+</html>
