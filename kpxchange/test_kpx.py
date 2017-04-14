@@ -12,7 +12,8 @@ class ServerTests(unittest.TestCase):
         self.app = run.app.test_client()
         app_path = run.app.root_path
         print (app_path)
-        if not os.path.exists(os.path.join(app_path,('vault/test'))): os.mkdir(os.path.join(app_path,('vault/test')))
+
+        if not os.path.exists(os.path.join(app_path,('vault/test'))): os.makedirs(os.path.join(app_path,('vault/test')))
 
     def tearDown(self):
         pass

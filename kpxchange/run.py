@@ -10,6 +10,10 @@ app = Flask(__name__)
 app.config.from_object(config)
 recaptcha = ReCaptcha(app=app)
 
+#Vault directory
+app_path = app.root_path
+if not os.path.exists(os.path.join(app_path,(config.VAULT_PATH))): os.makedirs(os.path.join(app_path,(config.VAULT_PATH)))
+
 #DDOS mitigation
 limiter = Limiter (app, key_func=lambda : request.remote_addr, global_limits=["60/minute" ])
 
