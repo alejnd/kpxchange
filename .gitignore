@@ -107,4 +107,5 @@ pip-selfcheck.json
 .vscode/
 # secrets
 config.py
+master.asc
 vault/
