@@ -43,16 +43,13 @@ def generate():
         return newdir
     return abort(400)
 
+@app.route('/download/<path>/', defaults={'filename': None}, methods=['GET'])
 @app.route('/download/<path>/<filename>', methods=['GET'])
 def download(path, filename):
-    return send_from_directory (os.path.join(config.VAULT_PATH, path), filename, as_attachment=True)
+    user_path = (os.path.join(config.VAULT_PATH, path))
+    if not filename: return str(os.listdir(user_path))
+    return send_from_directory(user_path, filename, as_attachment=True)
 
-#TEST recaptcha
-@app.route("/submit", methods=["POST"])
-def submit():
-
-    if recaptcha.verify(): return "recaptcha SUCCESS"
-    else: return "-- FAIL --"
 
 def main():
    app.run(host = config.HOST)
